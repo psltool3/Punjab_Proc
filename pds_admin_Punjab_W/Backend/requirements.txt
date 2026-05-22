@@ -1,0 +1,13 @@
+numpy
+pandas
+pymongo
+PuLP
+excelrd
+Flask
+flask-cors
+mysql-connector-python
+requests
+msoffcrypto-tool
+xlrd
+cryptography
+openpyxl

@@ -1,0 +1,6 @@
+Status Code: 200
+Backend response:
+{'District_Count': 1, 'FPS_No': 18, 'Storage_Mota': 3463472.0, 'Storage_Patla': 4411313.0, 'Storage_Saran': 5278518.0, 'Total_Demand': 3266.636, 'Total_Demand_Rice': 1816.3239999999998, 'Total_Supply': 2629.496, 'Warehouse_No': 14}
+FAIL: Field 'Incoming_Min_Mota' not found in response
+FAIL: Field 'Incoming_Min_Patla' not found in response
+FAIL: Field 'Incoming_Min_Saran' not found in response

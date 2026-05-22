@@ -1,0 +1,124 @@
+{
+  "warehouse": [
+    {
+      "State Name": "",
+      "WH_District": "Bankura",
+      "WH_Name": "DAKAI DAHALA SKUS LTD.",
+      "WH_ID": "192000233920015",
+      "WH_Lat": "22.942",
+      "WH_Long": "86.9231",
+      "Paddy_Procurement": "7844.46"
+    },
+    {
+      "State Name": "",
+      "WH_District": "Bankura",
+      "WH_Name": "DHADKIDIHI SKUS LTD",
+      "WH_ID": "192000233920020",
+      "WH_Lat": "22.9012",
+      "WH_Long": "86.8523",
+      "Paddy_Procurement": "9425.3"
+    },
+    {
+      "State Name": "",
+      "WH_District": "Bankura",
+      "WH_Name": "JOTBEHAR SKUS LTD",
+      "WH_ID": "192000233920026",
+      "WH_Lat": "23.0728",
+      "WH_Long": "87.6365",
+      "Paddy_Procurement": "21929.97"
+    },
+    {
+      "State Name": "",
+      "WH_District": "Bankura",
+      "WH_Name": "HATIRAMPUR SKUS LTD",
+      "WH_ID": "192000233920028",
+      "WH_Lat": "23.0631",
+      "WH_Long": "86.8793",
+      "Paddy_Procurement": "22268.92"
+    },
+    {
+      "State Name": "",
+      "WH_District": "Bankura",
+      "WH_Name": "BHAGABANPUR SKUS LTD",
+      "WH_ID": "192000233920030",
+      "WH_Lat": "23.255803",
+      "WH_Long": "87.4733",
+      "Paddy_Procurement": "596.47"
+    },
+    {
+      "State Name": "",
+      "WH_District": "Bankura",
+      "WH_Name": "DIBAKARBATI SKUS LTD",
+      "WH_ID": "192000233920035",
+      "WH_Lat": "22.6696",
+      "WH_Long": "86.9348",
+      "Paddy_Procurement": "5463.56"
+    },
+    {
+      "State Name": "",
+      "WH_District": "Bankura",
+      "WH_Name": "JIAKANALI SKUS LTD",
+      "WH_ID": "192000233920036",
+      "WH_Lat": "22.8788",
+      "WH_Long": "86.881",
+      "Paddy_Procurement": "1250"
+    }
+  ],
+  "fps": [
+    {
+      "State Name": "",
+      "FPS_District": "Bankura",
+      "FPS_Name": "ABINASH RICE MILL",
+      "FPS_ID": "863",
+      "Type": "PARA",
+      "FPS_Lat": "23.376583",
+      "FPS_Long": "87.406503",
+      "Mill_Capacity": "144000",
+      "Factor": 3.98
+    },
+    {
+      "State Name": "",
+      "FPS_District": "Bankura",
+      "FPS_Name": "ANJAN MODERN RICE MILL",
+      "FPS_ID": "865",
+      "Type": "RAW",
+      "FPS_Lat": "23.24499",
+      "FPS_Long": "87.49732",
+      "Mill_Capacity": "144000",
+      "Factor": 3.184
+    },
+    {
+      "State Name": "",
+      "FPS_District": "Bankura",
+      "FPS_Name": "MS ANNAPURNA RICE MILL",
+      "FPS_ID": "867",
+      "Type": "RAW",
+      "FPS_Lat": "22.814453",
+      "FPS_Long": "87.008536",
+      "Mill_Capacity": "144000",
+      "Factor": 5.051
+    },
+    {
+      "State Name": "",
+      "FPS_District": "Bankura",
+      "FPS_Name": "BABA BAGHRYARAI RICE MILL",
+      "FPS_ID": "868",
+      "Type": "PARA",
+      "FPS_Lat": "23.28138",
+      "FPS_Long": "87.44375",
+      "Mill_Capacity": "144000",
+      "Factor": 7.563
+    },
+    {
+      "State Name": "",
+      "FPS_District": "Bankura",
+      "FPS_Name": "MS BISHNUPUR RICE MILL",
+      "FPS_ID": "872",
+      "Type": "PARA",
+      "FPS_Lat": "23.069837",
+      "FPS_Long": "87.298102",
+      "Mill_Capacity": "144000",
+      "Factor": 2.786
+    }
+  ]
+}
