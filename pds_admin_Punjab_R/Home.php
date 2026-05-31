@@ -505,32 +505,17 @@ require('Header.php');
 								<div class="card h-100"
 									style="background-color:#3F51B5; color:white; padding:12px; font-weight: bold;">
 									<div style="font-size:20px" id="total_target_qty"></div>
-									<div style="font-size:14px">Target Quantity (Qtl)</div>
+									<div style="font-size:14px">Mill Processing</div>
 								</div>
 							</div>
 							<div class="col-md-4 mb-4">
 								<div class="card h-100"
 									style="background-color:#FF6B81; color:white; padding:12px; font-weight: bold;">
 									<div style="font-size:20px" id="total_milling_capacity"></div>
-									<div style="font-size:14px">Milling Capacity (Qtl)</div>
+									<div style="font-size:14px">Paddy Procurement (Qtl)</div>
 								</div>
 							</div>
-							<div class="col-md-4 mb-4">
-								<div class="card h-100"
-									style="background-color:#34495E; color:white; padding:12px; font-weight: bold;">
-									<div style="font-size:20px" id="total_storage_capacity"></div>
-									<div style="font-size:14px">Storage Capacity (Qtl)</div>
-								</div>
-							</div>
-						</div>
-						<!-- Feasibility Result Banner -->
-						<div class="row">
-							<div class="col-md-12">
-								<div id="feasibility_card" class="card"
-									style="padding:14px; font-weight:bold; font-size:16px; border-radius:8px; display:none;">
-									<div id="feasibility_result"></div>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 					&nbsp
@@ -907,30 +892,11 @@ require('Header.php');
 									document.getElementById("total_district").innerHTML = formatNumberWithCommasWithoutDecimal(data["District_Count"]);
 									
 									// New cards: Target Quantity, Milling Capacity, Storage Capacity
-									var targetQty = data["Total_Target_Qty"] || 0;
-									var millingCap = data["Total_Milling_Capacity"] || 0;
-									var storageCap = data["Total_Storage_Capacity"] || 0;
+									var targetQty = data["Milling_Capacity"] || 0;
+									var millingCap = data["Total_Demand"] || 0;
 									
 									document.getElementById("total_target_qty").innerHTML = formatNumberWithCommasWithoutDecimal(targetQty);
 									document.getElementById("total_milling_capacity").innerHTML = formatNumberWithCommasWithoutDecimal(millingCap);
-									document.getElementById("total_storage_capacity").innerHTML = formatNumberWithCommasWithoutDecimal(storageCap);
-									
-									// Feasibility check: Target Qty >= Milling Capacity AND Target Qty >= Storage Capacity
-									var feasibilityCard = document.getElementById("feasibility_card");
-									var feasibilityResult = document.getElementById("feasibility_result");
-									feasibilityCard.style.display = "block";
-									if (targetQty >= millingCap && targetQty >= storageCap) {
-										feasibilityCard.style.backgroundColor = "#27AE60";
-										feasibilityCard.style.color = "white";
-										feasibilityResult.innerHTML = "&#10003; Feasible: Target Quantity (" + formatNumberWithCommasWithoutDecimal(targetQty) + " Qtl) &ge; Milling Capacity (" + formatNumberWithCommasWithoutDecimal(millingCap) + " Qtl) and Storage Capacity (" + formatNumberWithCommasWithoutDecimal(storageCap) + " Qtl)";
-									} else {
-										feasibilityCard.style.backgroundColor = "#E74C3C";
-										feasibilityCard.style.color = "white";
-										var reason = [];
-										if (targetQty < millingCap) reason.push("Milling Capacity (" + formatNumberWithCommasWithoutDecimal(millingCap) + " Qtl) exceeds Target Qty");
-										if (targetQty < storageCap) reason.push("Storage Capacity (" + formatNumberWithCommasWithoutDecimal(storageCap) + " Qtl) exceeds Target Qty");
-										feasibilityResult.innerHTML = "&#10007; Infeasible: Target Quantity (" + formatNumberWithCommasWithoutDecimal(targetQty) + " Qtl) &mdash; " + reason.join("; ");
-									}
 									
 									if (!isJobRunning) {
 										document.getElementById("processingPopup").style.display = "none";
@@ -976,49 +942,29 @@ require('Header.php');
 			document.getElementById("generateoptinizedplanbutton").style.display = "";
 			var isInfeasible = false;
 			if(type=="intra"){
-				if (district_names["District_Name_All"].length > 0) {
+				if (district_names && district_names["District_Name_All"] && district_names["District_Name_All"].length > 0) {
 					var concatenatedNames = district_names["District_Name_All"].join(', ');
-					document.getElementById("resultdistrict").innerHTML = "Intra district movement is infeasble For Mota- " + concatenatedNames;
+					document.getElementById("resultdistrict").innerHTML = "Intra district movement is infeasible for: " + concatenatedNames;
 					document.getElementById("resultdistrict").style.color = "#ADFF2F"; 
 					isInfeasible = true;
 				} 
 				else {
-					document.getElementById("resultdistrict").innerHTML = "Intra scenario in every district is feasible For Mota";
+					document.getElementById("resultdistrict").innerHTML = "Intra scenario in every district is feasible";
 					document.getElementById("resultdistrict").style.color = "#1111BB";
 				}
 				
-				if (district_names2["District_Name_All2"].length > 0) {
-					var concatenatedNames1 = district_names2["District_Name_All2"].join(', ');
-					document.getElementById("resultdistrict1").innerHTML = "Intra district movement is infeasble For Patla- " + concatenatedNames1;
-					document.getElementById("resultdistrict1").style.color = "#ADFF2F"; 
-					isInfeasible = true;
-				} else {
-					document.getElementById("resultdistrict1").innerHTML = "Intra scenario in every district is feasible For Patla";
-					document.getElementById("resultdistrict1").style.color = "#1111BB";
-				}
-				
-				if (district_names3["District_Name_All3"].length > 0) {
-					var concatenatedNames2 = district_names3["District_Name_All3"].join(', ');
-					document.getElementById("resultdistrict2").innerHTML = "Intra district movement is infeasble For Saran- " + concatenatedNames2;
-					document.getElementById("resultdistrict2").style.color = "#ADFF2F"; 
-					isInfeasible = true;
-				} else {
-					document.getElementById("resultdistrict2").innerHTML = "Intra scenario in every district is feasible For Saran";
-					document.getElementById("resultdistrict2").style.color = "#1111BB";
-				}
+				document.getElementById("resultdistrict1").innerHTML = "";
+				document.getElementById("resultdistrict2").innerHTML = "";
 			}
 			
 			if (isInfeasible) {
-				document.getElementById("generateoptinizedplanbutton").style.display = "none";
+				// We don't hide the button anymore so the user can still run optimization
+				// document.getElementById("generateoptinizedplanbutton").style.display = "none";
 			}
 
 			// Increase font size and make text bold
 			document.getElementById("resultdistrict").style.fontSize = "18px";
 			document.getElementById("resultdistrict").style.fontWeight = "bold";
-			document.getElementById("resultdistrict1").style.fontSize = "18px";
-			document.getElementById("resultdistrict1").style.fontWeight = "bold";
-			document.getElementById("resultdistrict2").style.fontSize = "18px";
-			document.getElementById("resultdistrict2").style.fontWeight = "bold";
 			
 		} else {
 			document.getElementById("resultdistrict").innerHTML = "";
@@ -1338,40 +1284,26 @@ function handleStateCheckboxChange() {
 			.then(response => response.json())
 			.then(data => {
 				district_names = data.District_Name;
-				district_names1 = data.District_Name1;
-				district_names2 = data.District_Name2;
-				district_names3 = data.District_Name3;
-				var totalCapacity = Object.values(data.District_Capacity).reduce((acc, capacity) => acc + capacity, 0);
-				var totalCapacity1 = Object.values(data.District_Capacity1).reduce((acc, capacity) => acc + capacity, 0);
-				var totalCapacity2 = Object.values(data.District_Capacity2).reduce((acc, capacity) => acc + capacity, 0);
-				var totalDemandWheat = Object.values(data.District_Demand).reduce((acc, demand) => acc + demand, 0);
-				var totalDemandRice = Object.values(data.District_Demand_Rice).reduce((acc, demand) => acc + demand, 0);
-				var totalDemandTotal = Object.values(data.District_Demand_Total).reduce((acc, demand) => acc + demand, 0);
-				var totalDemand = totalDemandWheat + totalDemandRice;
+				var totalCapacity = data.District_Capacity ? Object.values(data.District_Capacity).reduce((acc, capacity) => acc + capacity, 0) : 0;
+				var totalDemand = data.District_Demand ? Object.values(data.District_Demand).reduce((acc, demand) => acc + demand, 0) : 0;
 				var today_date = document.getElementById("today_date").value;
 
 				// Format the total demand and total capacity values with commas
-				var formattedTotalDemand = totalDemandWheat.toLocaleString();
+				var formattedTotalDemand = totalDemand.toLocaleString();
 				var formattedTotalCapacity = totalCapacity.toLocaleString();
-				var formattedTotalDemand1 = totalDemandRice.toLocaleString();
-				var formattedTotalCapacity1 = totalCapacity1.toLocaleString();
-				var formattedTotalDemand2 = totalDemandTotal.toLocaleString();
-				var formattedTotalCapacity2 = totalCapacity2.toLocaleString();
 
-				document.getElementById("totalFciDemand").innerHTML = "<span style='color: white; font-size: 14px;'>" + "Total Storage Mota: " + formattedTotalDemand + " (Qtl)</span>";
-				document.getElementById("totalFciSupply").innerHTML = "<span style='color: white; font-size: 14px;'>" + "Total Procurement Mota: " + formattedTotalCapacity + " (Qtl)</span>";
+				document.getElementById("totalFciDemand").innerHTML = "<span style='color: white; font-size: 14px;'>" + "Total Demand: " + formattedTotalDemand + " (Qtl)</span>";
+				document.getElementById("totalFciSupply").innerHTML = "<span style='color: white; font-size: 14px;'>" + "Total Supply: " + formattedTotalCapacity + " (Qtl)</span>";
 				
-				document.getElementById("totalFciDemand1").innerHTML = "<span style='color: white; font-size: 14px;'>" + "Total Storage Patla: " + formattedTotalDemand1 + " (Qtl)</span>";
-				document.getElementById("totalFciSupply1").innerHTML = "<span style='color: white; font-size: 14px;'>" + "Total Procurement Patla: " + formattedTotalCapacity1 + " (Qtl)</span>";
+				document.getElementById("totalFciDemand1").innerHTML = "";
+				document.getElementById("totalFciSupply1").innerHTML = "";
 				
-				document.getElementById("totalFciDemand2").innerHTML = "<span style='color: white; font-size: 14px;'>" + "Total Storage Saran: " + formattedTotalDemand2 + " (Qtl)</span>";
-				document.getElementById("totalFciSupply2").innerHTML = "<span style='color: white; font-size: 14px;'>" + "Total Procurement Saran: " + formattedTotalCapacity2 + " (Qtl)</span>";
+				document.getElementById("totalFciDemand2").innerHTML = "";
+				document.getElementById("totalFciSupply2").innerHTML = "";
 				
 				document.getElementById("selectedMonth").innerHTML = "<span style='color: white; font-size: 14px;'>" + "Selected Date: " + today_date + "</span>";
 
 				districtdata = data.District_Name;
-				districtdata1 = data.District_Name2;
-				districtdata2 = data.District_Name3;
 				
 
 				function isEmptyDistrict(d) {
@@ -1382,53 +1314,18 @@ function handleStateCheckboxChange() {
 					);
 				}
 
-				if (totalCapacity > -2 && totalDemandWheat > -2 && totalCapacity1 > -2 &&
-					totalDemandRice > -2 && totalCapacity2 > -2 && totalDemandTotal > -2) {
+				if (totalCapacity > -2 && totalDemand > -2) {
 
-					if (
-						totalCapacity <= totalDemandWheat &&
-						totalCapacity1 <= totalDemandRice &&
-						totalCapacity2 <= totalDemandTotal &&
-						isEmptyDistrict(districtdata["District_Name_All"]) &&
-						isEmptyDistrict(districtdata1["District_Name_All2"]) &&
-						isEmptyDistrict(districtdata2["District_Name_All3"]) 
-					) {
+					if (true) { // Always allow optimization to be attempted
 						document.getElementById("result").innerHTML =
 							"<span style='font-weight: bold; font-size: 20px; color: green;'>Optimization can be done.</span>";
 						document.getElementById("districtcheckbox").style.display = "block";
 					}
-					else {
-						document.getElementById("result").innerHTML =
-							"<span style='font-weight: bold; font-size: 20px; color: red;'>Optimiazation cannot be done infeasible solution.</span>";
-						document.getElementById("districtcheckbox").style.display = "none";
-						document.getElementById("generateoptinizedplanbutton").style.display = "none";
-					}
-					
 					
 					console.log("=== DEBUG VALUES ===");
-
-					console.log("totalCapacity <= totalDemandWheat",
-						totalCapacity, "<=", totalDemandWheat,
-						totalCapacity <= totalDemandWheat
-					);
-
-					console.log("totalCapacity1 <= totalDemandRice",
-						totalCapacity1, "<=", totalDemandRice,
-						totalCapacity1 <= totalDemandRice
-					);
-
-					console.log("totalCapacity2 <= totalDemandTotal",
-						totalCapacity2, "<=", totalDemandTotal,
-						totalCapacity2 <= totalDemandTotal
-					);
-
+					console.log("totalCapacity <= totalDemand", totalCapacity, "<=", totalDemand, totalCapacity <= totalDemand);
 					console.log("districtdata:", districtdata);
-					console.log("districtdata1:", districtdata1);
-					console.log("districtdata2:", districtdata2);
-
 					console.log("isEmpty districtdata:", isEmptyDistrict(districtdata));
-					console.log("isEmpty districtdata1:", isEmptyDistrict(districtdata1));
-					console.log("isEmpty districtdata2:", isEmptyDistrict(districtdata2));
 				
 					
 					var type = document.getElementById("type").value;
@@ -1446,46 +1343,22 @@ function handleStateCheckboxChange() {
 					const unionArray = Array.from(unionSet);
 
 					// Get capacities and demands for each district
-					var capacities = unionArray.map(district => data.District_Capacity[district]);
-					var capacities1 = unionArray.map(district => data.District_Capacity1[district]);
-					var capacities2 = unionArray.map(district => data.District_Capacity2[district]);
-					var demands = unionArray.map(district => data.District_Demand[district]);
-					var demands_rice = unionArray.map(district => data.District_Demand_Rice[district]);
-					var demands_total = unionArray.map(district => data.District_Demand_Total[district]);
+					var capacities = unionArray.map(district => data.District_Capacity[district] || 0);
+					var demands = unionArray.map(district => data.District_Demand[district] || 0);
 
 					// Generate newData object
 					var newData = {
 						labels: unionArray,
 						datasets: [
 							{
-								label: 'Mota Storage',
-								backgroundColor: '#EFB838',
-								data: demands
-							},
-							{
-								label: 'Procurement Mota',
-								backgroundColor: '#EFB838',
+								label: 'Supply',
+								backgroundColor: '#1640D6',
 								data: capacities
 							},
 							{
-								label: 'Patla Storage',
-								backgroundColor: '#FF5733',
-								data: demands_rice
-							},
-							{
-								label: 'Procurement Patla',
-								backgroundColor: '#FF5733',
-								data: capacities1
-							},
-							{
-								label: 'Saran Storage',
-								backgroundColor: '#04AFEC',
-								data: demands_total
-							},
-							{
-								label: 'Procurement Saran',
-								backgroundColor: '#04AFEC',
-								data: capacities2
+								label: 'Demand',
+								backgroundColor: '#25E6A5',
+								data: demands
 							}
 						]
 					};

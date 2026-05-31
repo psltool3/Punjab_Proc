@@ -53,6 +53,14 @@ if($numrows>0){
 	}
 }
 
+$milling_centers = [];
+$mc_result = mysqli_query($con, "SELECT name FROM milling_center");
+if(mysqli_num_rows($mc_result) > 0){
+	while($mc_row = mysqli_fetch_assoc($mc_result)){
+		array_push($milling_centers, $mc_row["name"]);
+	}
+}
+
 function formatName($name) {
 	$name = preg_replace('/[^a-zA-Z0-9_ ]/', '', $name);
     $name = ucwords(strtolower($name));
@@ -106,6 +114,11 @@ try{
 
 				if(!in_array($column[$district], $districts)){
 					echo "Error : Check District Name: ".$column[$district];
+					echo "</br>";
+					$redirect = 0;
+				}
+				if(!in_array(strtoupper(trim($column[$milling_center])), array_map('strtoupper', $milling_centers))){
+					echo "Error : Invalid Milling Center: ".$column[$milling_center];
 					echo "</br>";
 					$redirect = 0;
 				}

@@ -74,6 +74,9 @@ if($numrows>0){
 				<li <?php if ($currentFile == 'Block.php') echo 'class="active"'; ?>>
 					<a href="Block.php"> <span class="xn-text">Edit Blocks</span></a>
 				</li>
+				<li <?php if ($currentFile == 'MillingCenter.php') echo 'class="active"'; ?>>
+					<a href="MillingCenter.php"> <span class="xn-text">Milling Centers</span></a>
+				</li>
 				
 				
 					<li <?php if ($currentFile == 'Message.php') echo 'class="active"'; ?>>

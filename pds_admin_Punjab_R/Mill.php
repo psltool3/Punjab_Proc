@@ -79,7 +79,7 @@ require('Header.php');
                                         <thead>
                                             <tr>
 												<th style="font-size:15px">Mill District</th>
-												<th style="font-size:15px">Milling Centre</th>
+												<th style="font-size:15px">Milling Center</th>
 												<th style="font-size:15px">Mill Name</th>
 												<th style="font-size:15px">Mill ID</th>
 												<th style="font-size:15px">Mill Latitude</th>

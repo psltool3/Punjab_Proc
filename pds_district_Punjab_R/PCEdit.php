@@ -129,9 +129,10 @@ else{
                                                 <label class="col-md-3 control-label">Mill Centre*</label>
                                                 <div class="col-md-9">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon"><span class="fa fa-info"></span></span>
-                                                        <input type="text" class="form-control" id="milling_center" name="milling_center" value="<?php echo $milling_center ?>" required />
-                                                    </div>
+												   <span class="input-group-addon"><span class="fa fa-arrow-down"></span></span>
+                                                    <select class="form-control" id="milling_center" name="milling_center">
+                                                    </select>
+													</div>
                                                     <span class="help-block">Milling Centre Name</span>
                                                 </div>
                                             </div>
@@ -265,6 +266,8 @@ else{
 		<?php
 			require('DistrictAutocomplete.php');
 			echo "<script>setSelectedValue('district','$district'); </script>";
+			require('MillingCenterAutocomplete.php');
+			echo "<script>setSelectedValue('milling_center','$milling_center'); </script>";
 		?>
 		
 		<script>

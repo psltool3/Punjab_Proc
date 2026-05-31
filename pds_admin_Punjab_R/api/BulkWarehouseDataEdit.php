@@ -162,7 +162,7 @@ try{
 						$redirect = 0;
 					}
                     
-					if(!in_array($column[$district], $districts)){
+					if(!in_array(strtoupper(trim($column[$district])), array_map('strtoupper', $districts))){
 						echo "Error : Check District Name: ".$column[$district];
 						echo "</br>";
 						$redirect = 0;

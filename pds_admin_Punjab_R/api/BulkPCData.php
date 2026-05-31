@@ -57,6 +57,14 @@ while ($r = mysqli_fetch_assoc($res)) {
     $districts[] = $r['name'];
 }
 
+/* ================= MILLING CENTER MASTER ================= */
+
+$milling_centers = [];
+$res_mc = mysqli_query($con, "SELECT name FROM milling_center");
+while ($r_mc = mysqli_fetch_assoc($res_mc)) {
+    $milling_centers[] = $r_mc['name'];
+}
+
 /* ================= HELPER FUNCTIONS ================= */
 
 function isValidCoordinate($value, $type) {
@@ -126,8 +134,13 @@ try {
                 $redirect = 0;
             }
 
-            if (!in_array($column[$district], $districts)) {
+            if (!in_array(strtoupper(trim($column[$district])), array_map('strtoupper', $districts))) {
                 echo "Error : Invalid District - ".$column[$district]."<br>";
+                $redirect = 0;
+            }
+
+            if (!in_array(strtoupper(trim($column[$milling_center])), array_map('strtoupper', $milling_centers))) {
+                echo "Error : Invalid Milling Center - ".$column[$milling_center]."<br>";
                 $redirect = 0;
             }
 			if (!is_numeric($column[$latitude]) || $column[$latitude] >= 40) {

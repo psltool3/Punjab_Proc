@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require('util/Connection.php');
 require('util/SessionCheck.php');
 require('Header.php');
@@ -81,9 +81,10 @@ require('Header.php');
                                                 <label class="col-md-3 control-label">Mill Centre*</label>
                                                 <div class="col-md-9">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon"><span class="fa fa-info"></span></span>
-                                                        <input type="text" class="form-control" id="milling_center" name="milling_center" required />
-                                                    </div>
+												   <span class="input-group-addon"><span class="fa fa-arrow-down"></span></span>
+                                                    <select class="form-control" id="milling_center" name="milling_center">
+                                                    </select>
+													</div>
                                                     <span class="help-block">Milling Centre Name</span>
                                                 </div>
                                             </div>
@@ -181,6 +182,7 @@ require('Header.php');
         <script type="text/javascript" src="js/plugins.js"></script>
         <script type="text/javascript" src="js/actions.js"></script>
 		<?php require('DistrictAutocomplete.php');  ?>
+		<?php require('MillingCenterAutocomplete.php');  ?>
 		
 		<script>
 		function showPopup() {

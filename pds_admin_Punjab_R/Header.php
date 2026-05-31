@@ -119,6 +119,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
 				<li>
 					<a href="District.php" style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Edit Districts</span></a>
 				</li>
+				<li>
+					<a href="MillingCenter.php" style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Edit Milling Centers</span></a>
+				</li>
 				
 				<!-- <li>
 					<a href="Block.php" style="padding-left:0px"><span class="xn-text" style="font-family:sans-serif;font-weight:italic;font-size:16px;">Edit Blocks</span></a>
